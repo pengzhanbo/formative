@@ -6,14 +6,14 @@
 
 ## 效果展示
 
-![](./public/demo-1.png)
+![](./images/demo-1.png)
 
 字段为 数组/对象：
-![](./public/demo-2.png)
+![](./images/demo-2.png)
 
 对字段分组展示：
 
-![](./public/demo-3.png)
+![](./images/demo-3.png)
 
 
 ## 使用
