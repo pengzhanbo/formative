@@ -32,7 +32,7 @@ export default defineComponent({
     const text = useDotPath(model, dotKey)
 
     return () => (
-      <NFormItem label={props.schema.label} path={dotKey.value}>
+      <NFormItem label={props.schema.label} path={dotKey.value} v-show={props.show} rule={props.schema.rule}>
         <p class="fm-content">
           <p class="fm-font-bold">{text.value}</p>
           <Description description={props.schema.description} />

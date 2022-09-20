@@ -65,6 +65,11 @@ export default defineComponent({
             <span>{props.schema.label}</span>
             <Description description={props.schema.description} />
           </p>
+          {/**
+           * 如果配置中的 items 是一个 固定长度的数组，
+           * 那么则对每个元素 根据其 field 类型动态渲染，（允许每个元素类型不同）
+           * 如果不是，则表示 声明的是数组中的每个元素的类型，（每个元素的类型相同）
+           */}
           {isArray(props.schema.items) ? (
             props.schema.items.map((item, index) => (
               <Field

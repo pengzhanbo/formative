@@ -38,7 +38,12 @@ export default defineComponent({
     })
 
     return () => (
-      <NFormItem label={props.schema.label} path={dotKey.value}>
+      <NFormItem
+        label={props.schema.label}
+        path={dotKey.value}
+        v-show={props.show}
+        rule={props.schema.rule}
+      >
         <p class="fm-content">
           <NSwitch v-model={[switchValue.value, 'value']} {...option.value} />
           <Description description={props.schema.description} />

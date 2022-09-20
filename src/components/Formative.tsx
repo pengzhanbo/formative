@@ -27,26 +27,51 @@ export default defineComponent({
     })
 
     const schema = computed(() => props.config.schema)
+    /**
+     * 获取表单数据的初始数据，如果有传入 modelValue 那么表示用户预设了 表单数据
+     * 但是还需要校验字段是否齐全，并且补全所有字段以及对应的默认值
+     */
     const initialValue = getInitialValue(schema.value, cloneJson(props.modelValue || {}))
     const formModel = ref(initialValue)
 
+    /**
+     * 如果外层绑定的 表单数据被覆盖,
+     * 那么组件内的 数据需要重新更新
+     */
     watch(
       () => props.modelValue,
       (v) => {
         if (v && v !== formModel.value) {
-          formModel.value = cloneJson(v)
+          formModel.value = getInitialValue(schema.value, cloneJson(v))
         }
       }
     )
 
+    /**
+     * 内层的表单数据更新，通过 emit发送到外层
+     * 这也是实现 v-model 指令的关键
+     */
     watch(
       () => formModel.value,
       (v) => emit('update:modelValue', v),
       { deep: true }
     )
 
+    /**
+     * 通过 provide() 向表单内的注入 表单数据
+     * 内部的 field组件通过 inject 直接获取数据
+     */
     const injectKey = useFormDataProvide(formModel)
 
+    /**
+     * 当你大体看完这个组件的内容，那么应该前往
+     * ./Field.tsx 文件
+     * 这个文件是实现 表单生成的关键组件
+     *
+     * 而 ./Group.tsx 组件，其目的是能够对 表单的字段在渲染上能够进行 分组，
+     * 使得字段能够根据某个维度进行分组划分显示，即对 多个Field 再包上一层，
+     * 所以并不是关键
+     */
     return () => (
       <NForm {...formOption.value} model={formModel.value} class="fm-formative">
         {schema.value.map((field) =>
@@ -61,15 +86,16 @@ export default defineComponent({
   },
 })
 
-function getInitialValue<T extends object>(
+function getInitialValue(
   schema: FormativeSchema,
-  result: T = Object.create(null)
-): T {
+  result = Object.create(null)
+) {
   schema.forEach((item) => {
     if (item.type === 'group') {
       getInitialValue(item.schema, result)
     } else {
-      result[item.field] = result[item.field] || getDefaultValue(item)
+      const { field } = item
+      result[field] = hasOwn(result, field) ? result[field] : getDefaultValue(item)
     }
   })
   return result

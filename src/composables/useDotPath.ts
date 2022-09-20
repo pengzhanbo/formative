@@ -1,3 +1,11 @@
+/**
+ * 如果 表单数据结构为 { a: 1, b: { c: 2 }, d: ['1'] }
+ * 为了方便嵌套时可直接 读写 表单数据，
+ * 通过 本模块实现
+ *    formData['b.c'] 即可读写 formData.b.c，
+ *    formData['d.0'] 即可读写 formData.d[0]
+ */
+
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
 import type { FieldItem } from '../types'

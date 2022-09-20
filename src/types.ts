@@ -1,3 +1,7 @@
+/**
+ * 声明文件描述了 配置一个表单时所需要的配置字段
+ */
+
 import type { FormItemRule, SelectGroupOption, SelectOption } from 'naive-ui'
 
 export interface FormativeConfig {
@@ -57,6 +61,7 @@ export interface BasicField {
   label: string
   description?: string
   rule?: FormItemRule | FormItemRule[]
+  showField?: boolean | ((fields: Record<string, any>) => boolean)
 }
 
 export interface GroupField {
@@ -69,6 +74,15 @@ export interface GroupField {
   showField?: boolean | ((fields: Record<string, any>) => boolean)
 }
 
+/**
+ * 以下 Field 类型声明， 属性来自使用的对应的 naive-ui 组件，
+ * 访问 https://www.naiveui.com/zh-CN/os-theme 官方文档获取更多信息
+ */
+
+/**
+ * 使用的 NInput 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/input
+ */
 export interface TextField extends BasicField {
   type: 'text'
   default?: string
@@ -103,6 +117,10 @@ export interface TextViewField extends BasicField {
   default?: string
 }
 
+/**
+ * 使用 NRadio NRadioGroup NRadioButton 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/radio
+ */
 export interface RadioField extends BasicField {
   type: 'radio'
   default?: number | string | boolean
@@ -111,6 +129,10 @@ export interface RadioField extends BasicField {
   onUpdateValue?: (value: string | number | boolean) => void
 }
 
+/**
+ * 使用 NCheckbox NCheckboxGroup 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/checkbox
+ */
 export interface CheckboxField extends BasicField {
   type: 'checkbox'
   default?: (number | string)[]
@@ -123,6 +145,10 @@ export interface CheckboxField extends BasicField {
   ) => void
 }
 
+/**
+ * 使用 NSwitch 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/switch
+ */
 export interface SwitchField extends BasicField {
   type: 'switch'
   default?: boolean
@@ -135,6 +161,10 @@ export interface SwitchField extends BasicField {
   onUpdateValue?: (value: boolean) => void
 }
 
+/**
+ * 使用 NSelect 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/select
+ */
 export interface SelectField extends BasicField {
   type: 'select'
   default?: number | string | (number | string)[] | null
@@ -171,6 +201,10 @@ export interface SelectField extends BasicField {
   ) => void
 }
 
+/**
+ * 使用 NInputNumber 组件
+ * https://www.naiveui.com/zh-CN/os-theme/components/input-number
+ */
 export interface NumberField extends BasicField {
   type: 'number'
   default?: number
@@ -195,16 +229,26 @@ export interface NumberField extends BasicField {
   onUpdateValue?: (value: number | null) => void
 }
 
+/**
+ * 支持在 字段为 object 类型
+ */
 export interface ObjectField extends BasicField {
   type: 'object'
   default?: Record<string, any>
   schema: FieldItem[]
 }
 
+/**
+ * 支持 字段为 数组类型
+ */
 export interface ArrayField extends BasicField {
   type: 'array'
   default?: unknown[]
   maxlength?: number
   minlength?: number
+  /**
+   * 如果 items 为非数组，则声明的是数组中每个元素的 schema，
+   * 如果 items 为数组， 则声明的是固定长度的数组中各个元素的 schema
+   */
   items: ArrayFieldItem | ArrayFieldItem[]
 }
