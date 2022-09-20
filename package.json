@@ -1,0 +1,73 @@
+{
+  "name": "formative",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A technical solution for generating forms through configuration",
+  "main": "dist/formative.umd.js",
+  "module": "dist/formative.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/formative.umd.js",
+      "import": "./dist/formative.mjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "pengzhanbo",
+    "email": "q942450674@outlook.com"
+  },
+  "keywords": [
+    "Form",
+    "Configuration",
+    "vue3",
+    "vue"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && pnpm build:tsc",
+    "build:tsc": "tsc src/types.ts --outDir dist --declaration --emitDeclarationOnly"
+  },
+  "dependencies": {
+    "naive-ui": "^2.33.3",
+    "vue": "^3.2.39",
+    "vue-json-pretty": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/json-schema": "^7.0.11",
+    "@types/node": "^18.7.18",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-define-config": "^1.7.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.5.1",
+    "postcss": "^8.4.16",
+    "postcss-html": "^1.5.0",
+    "postcss-scss": "^4.0.5",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.9",
+    "terser": "^5.15.0",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.2",
+    "vue-eslint-parser": "^9.1.0"
+  },
+  "peerDependencies": {
+    "naive-ui": ">=2.0.0",
+    "vue": ">=3.0.0"
+  },
+  "packageManager": "pnpm@7.9.0",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  }
+}

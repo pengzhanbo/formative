@@ -1,0 +1,116 @@
+$prefix: fm;
+
+.#{$prefix} {
+
+  &-formative {
+
+    --fm-c-border: rgb(220, 220, 220);
+    --fm-c-bg-container: rgb(246, 246, 246);
+    --fm-c-bg: rgb(255, 255, 255);
+  }
+
+  &-formative {
+    background-color: var(--fm-c-bg);
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &-icon {
+    width: 1em;
+    height: 1em;
+    color: currentColor;
+  }
+
+  &-flex-1 {
+    flex: 1;
+  }
+
+  &-ml-4 {
+    margin-left: 1rem;
+  }
+
+  &-font-bold {
+    font-weight: bold;
+  }
+
+  &-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-object-wrapper,
+  &-array-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0.5rem 0 1rem;
+    margin: 0 0 1rem;
+    border-bottom: solid 1px var(--fm-c-border);
+    background-color: var(--fm-c-bg-container);
+
+    & & {
+      padding-top: 0.5rem;
+      padding-right: 0.25rem;
+    }
+  }
+
+  &-object-title,
+  &-array-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1.25;
+  }
+
+  &-group-wrapper {
+    position: relative;
+    border-top: solid 1px var(--fm-c-border);
+    margin-top: 1.25rem;
+    padding: 1.25rem 0;
+
+    & + & {
+      margin-top: 0;
+      border-top: none;
+    }
+  }
+
+  &-group-label {
+    position: absolute;
+    top: 0;
+    left: 1.25rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.25;
+    cursor: pointer;
+    transform: translateY(-50%);
+    background-color: var(--fm-c-bg);
+
+    & span:first-of-type {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &-group-icon {
+    transform: rotate(0deg);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-property: transform, -webkit-transform;
+
+    &.open {
+      transform: rotate(90deg);
+    }
+  }
+}
