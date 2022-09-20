@@ -126,10 +126,12 @@ interface BasicField {
   description?: string
   // 校验规则
   rule?: FormItemRule | FormItemRule[]
+  // 控制是否显示当前 field
+  showField?: boolean | ((fields: Record<string, any>) => boolean)
 }
 ```
 
-更多配置信息，查看 [types.ts](./src/formative/types.ts)
+更多配置信息，查看 [types.ts](./src/types.ts)
 
 ## 启动项目
 
