@@ -1,73 +1,65 @@
 {
   "name": "formative",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.3.0",
   "description": "A technical solution for generating forms through configuration",
-  "main": "dist/formative.umd.js",
-  "module": "dist/formative.mjs",
-  "type": "module",
-  "exports": {
-    ".": {
-      "require": "./dist/formative.umd.js",
-      "import": "./dist/formative.mjs"
-    },
-    "./style.css": "./dist/style.css"
-  },
-  "types": "./dist/types.d.ts",
-  "files": [
-    "dist"
-  ],
-  "license": "MIT",
   "author": {
     "name": "pengzhanbo",
     "email": "q942450674@outlook.com"
   },
+  "license": "MIT",
   "keywords": [
     "Form",
     "Configuration",
     "vue3",
     "vue"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/formative.mjs",
+      "require": "./dist/formative.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "main": "dist/formative.umd.js",
+  "module": "dist/formative.mjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm build:tsc",
     "build:tsc": "tsc src/types.ts --outDir dist --declaration --emitDeclarationOnly"
   },
-  "dependencies": {
-    "naive-ui": "^2.34.4",
-    "vue": "^3.3.4",
-    "vue-json-pretty": "^2.2.4"
-  },
-  "devDependencies": {
-    "@types/json-schema": "^7.0.12",
-    "@types/node": "^20.5.1",
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
-    "@vitejs/plugin-vue": "^4.3.1",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "eslint": "^8.47.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-define-config": "^1.23.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "postcss": "^8.4.28",
-    "postcss-html": "^1.5.0",
-    "postcss-scss": "^4.0.7",
-    "prettier": "^3.0.2",
-    "sass": "^1.66.1",
-    "terser": "^5.19.2",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.9",
-    "vue-eslint-parser": "^9.3.1"
-  },
   "peerDependencies": {
     "naive-ui": ">=2.0.0",
     "vue": ">=3.0.0"
   },
-  "packageManager": "pnpm@8.6.12",
-  "engines": {
-    "node": ">=16",
-    "pnpm": ">=7"
+  "dependencies": {
+    "naive-ui": "^2.38.2",
+    "vue": "^3.4.27",
+    "vue-json-pretty": "^2.4.0"
+  },
+  "devDependencies": {
+    "@pengzhanbo/eslint-config-vue": "1.11.0",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^20.14.2",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "eslint": "^9.4.0",
+    "postcss": "^8.4.38",
+    "postcss-html": "^1.7.0",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.77.5",
+    "terser": "^5.31.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.0"
   }
 }
