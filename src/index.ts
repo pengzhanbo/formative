@@ -19,7 +19,7 @@ export const defineFormativeConfig = (config: FormativeConfig): FormativeConfig 
 function install(app: App) {
   if ((install as any).installed)
     return
-  app.component(Formative.name, Formative)
+  app.component(Formative.name!, Formative)
   ;(install as any).installed = true
 }
 
