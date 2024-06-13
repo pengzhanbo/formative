@@ -1,6 +1,6 @@
 import config from '@pengzhanbo/eslint-config-vue'
 
-export default config({}, {
+export default config({
   rules: {
     'no-console': 'off',
   },
