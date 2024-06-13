@@ -36,7 +36,8 @@ export default defineComponent({
       return props.schema.options.map((option) => {
         if (isObject(option)) {
           return option
-        } else {
+        }
+        else {
           return { label: option as string, value: option }
         }
       })
@@ -51,15 +52,17 @@ export default defineComponent({
       >
         <p class="fm-content">
           <NRadioGroup v-model={[radio.value, 'value']} name={props.schema.field}>
-            {props.schema.button ? (
-              options.value.map(({ label, value }) => <NRadioButton label={label} value={value} />)
-            ) : (
-              <NSpace>
-                {options.value.map(({ label, value }) => (
-                  <NRadio label={label} value={value} />
-                ))}
-              </NSpace>
-            )}
+            {props.schema.button
+              ? (
+                  options.value.map(({ label, value }) => <NRadioButton label={label} value={value} />)
+                )
+              : (
+                <NSpace>
+                  {options.value.map(({ label, value }) => (
+                    <NRadio label={label} value={value} />
+                  ))}
+                </NSpace>
+                )}
           </NRadioGroup>
           <Description description={props.schema.description} />
           {slots.default?.()}

@@ -7,5 +7,5 @@
   "files.trimTrailingWhitespace": true,
   "npm.packageManager": "pnpm",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "css.validate": false,
+  "css.validate": false
 }

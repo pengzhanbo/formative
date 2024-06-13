@@ -35,7 +35,7 @@ export default defineComponent({
             <span>{props.schema.label}</span>
             <Description description={props.schema.description} />
           </p>
-          {props.schema.schema.map((prop) => (
+          {props.schema.schema.map(prop => (
             <Field schema={prop} injectKey={props.injectKey} dotKey={dotKey.value} />
           ))}
         </div>

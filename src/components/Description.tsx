@@ -12,13 +12,15 @@ export default defineComponent({
   },
   setup: (props) => {
     return () =>
-      props.description ? (
-        <NTooltip trigger="hover">
-          {{
-            trigger: () => <InfoIcon style={{ fontSize: '1rem', marginLeft: '0.5rem' }} />,
-            default: () => props.description,
-          }}
-        </NTooltip>
-      ) : null
+      props.description
+        ? (
+          <NTooltip trigger="hover">
+            {{
+              trigger: () => <InfoIcon style={{ fontSize: '1rem', marginLeft: '0.5rem' }} />,
+              default: () => props.description,
+            }}
+          </NTooltip>
+          )
+        : null
   },
 })

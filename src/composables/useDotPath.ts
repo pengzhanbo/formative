@@ -30,7 +30,7 @@ function getDotPath(model: Record<string, any>, dotKey: string): any {
   return model
 }
 
-export const useDotPath = <T = any>(model: FormData, dotKey: ComputedRef<string>) => {
+export function useDotPath<T = any>(model: FormData, dotKey: ComputedRef<string>) {
   const binding = computed<T>({
     set(data) {
       setDotPath(model.value, dotKey.value, data)
@@ -43,7 +43,7 @@ export const useDotPath = <T = any>(model: FormData, dotKey: ComputedRef<string>
   return binding
 }
 
-export const useDotKey = (props: { dotKey: string; schema: FieldItem }) => {
+export function useDotKey(props: { dotKey: string, schema: FieldItem }) {
   return computed(() => {
     const dotKey = props.dotKey
     return !isEmpty(dotKey) ? `${dotKey}.${props.schema.field}` : props.schema.field

@@ -44,7 +44,7 @@ export default defineComponent({
         if (v && v !== formModel.value) {
           formModel.value = getInitialValue(schema.value, cloneJson(v))
         }
-      }
+      },
     )
 
     /**
@@ -53,8 +53,8 @@ export default defineComponent({
      */
     watch(
       () => formModel.value,
-      (v) => emit('update:modelValue', v),
-      { deep: true }
+      v => emit('update:modelValue', v),
+      { deep: true },
     )
 
     /**
@@ -74,12 +74,14 @@ export default defineComponent({
      */
     return () => (
       <NForm {...formOption.value} model={formModel.value} class="fm-formative">
-        {schema.value.map((field) =>
-          field.type === 'group' ? (
-            <Group injectKey={injectKey} schema={field} />
-          ) : (
-            <Field injectKey={injectKey} schema={field} />
-          )
+        {schema.value.map(field =>
+          field.type === 'group'
+            ? (
+              <Group injectKey={injectKey} schema={field} />
+              )
+            : (
+              <Field injectKey={injectKey} schema={field} />
+              ),
         )}
       </NForm>
     )
@@ -88,12 +90,13 @@ export default defineComponent({
 
 function getInitialValue(
   schema: FormativeSchema,
-  result = Object.create(null)
+  result = Object.create(null),
 ) {
   schema.forEach((item) => {
     if (item.type === 'group') {
       getInitialValue(item.schema, result)
-    } else {
+    }
+    else {
       const { field } = item
       result[field] = hasOwn(result, field) ? result[field] : getDefaultValue(item)
     }
@@ -113,30 +116,38 @@ function getDefaultValue(field: FieldItem): unknown {
       return hasOwn(field, 'default') ? field.default : false
     case 'checkbox':
       return field.default || []
-    case 'select':
+    case 'select': {
       const multiple = hasOwn(field, 'multiple') ? field.multiple : false
       if (multiple) {
         return field.default ? (isArray(field.default) ? field.default : [field.default]) : []
-      } else {
-        if (field.default) return field.default
-        if (!field.options?.length) return ''
+      }
+      else {
+        if (field.default)
+          return field.default
+        if (!field.options?.length)
+          return ''
         if ((field.options[0] as any).options)
           return (field.options[0] as any).options[0].value || ''
         return (field.options[0] as any).value || ''
       }
-    case 'array':
-      if (field.default) return field.default
+    }
+    case 'array': {
+      if (field.default)
+        return field.default
       if (isArray(field.items)) {
-        return field.items.map((item) => (item as any).default)
-      } else {
-        return new Array(field.minlength || 0).fill((field.items as any).default)
+        return field.items.map(item => (item as any).default)
       }
-    case 'object':
+      else {
+        return Array.from({ length: field.minlength || 0 }).fill((field.items as any).default)
+      }
+    }
+    case 'object': {
       const obj = field.default || {}
       field.schema.forEach((prop) => {
         obj[prop.field] = obj[prop.field] || getDefaultValue(prop)
       })
       return obj
+    }
     default:
       return undefined
   }

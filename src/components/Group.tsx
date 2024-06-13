@@ -23,15 +23,16 @@ export default defineComponent({
   setup: (props) => {
     const model = useFormData(props.injectKey)
     const spread = ref(
-      props.schema.forgetSpread ? true : isBoolean(props.schema.spread) ? props.schema.spread : true
+      props.schema.forgetSpread ? true : isBoolean(props.schema.spread) ? props.schema.spread : true,
     )
     const handleClick = () => {
-      if (props.schema.forgetSpread) return
+      if (props.schema.forgetSpread)
+        return
       spread.value = !spread.value
     }
     const show = computed(() => {
-      const showField =
-        typeof props.schema.showField === 'undefined' ? true : props.schema.showField
+      const showField
+        = typeof props.schema.showField === 'undefined' ? true : props.schema.showField
       return isFunction(showField) ? showField(readonly(model)) : showField
     })
     return () => (
@@ -42,7 +43,7 @@ export default defineComponent({
           <ArrowIcon class={{ 'fm-group-icon': true, 'open': spread.value }} />
         </label>
         <div v-show={spread.value}>
-          {props.schema.schema.map((schema) => (
+          {props.schema.schema.map(schema => (
             <Field schema={schema} injectKey={props.injectKey} />
           ))}
         </div>

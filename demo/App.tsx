@@ -35,12 +35,12 @@ export default defineComponent({
           field: 'checkbox',
           type: 'checkbox',
           label: '多选',
-          options: ['Mark', 'John', 'Judy']
+          options: ['Mark', 'John', 'Judy'],
         },
         {
           field: 'number',
           type: 'number',
-          label: '数字'
+          label: '数字',
         },
         {
           type: 'array',
@@ -80,8 +80,8 @@ export default defineComponent({
     })
     watch(
       () => formData.value,
-      (v) => console.log(v),
-      { deep: true }
+      v => console.log(v),
+      { deep: true },
     )
     return () => (
       <div class="fm-flex">

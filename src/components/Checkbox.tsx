@@ -36,7 +36,8 @@ export default defineComponent({
       return props.schema.options.map((option) => {
         if (isObject(option)) {
           return option
-        } else {
+        }
+        else {
           return { label: option as string, value: option }
         }
       })
@@ -60,7 +61,7 @@ export default defineComponent({
         isIndeterminate.value = !!value && value.length > 0 && value.length < options.value.length
         checkAll.value = checkbox.value.length === options.value.length
       },
-      { immediate: true }
+      { immediate: true },
     )
 
     return () => (

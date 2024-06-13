@@ -11,9 +11,8 @@ export type FormInjectKey = InjectionKey<FormData>
 /**
  * 注入 formData
  * @param formData
- * @returns
  */
-export const useFormDataProvide = (formData: FormData): FormInjectKey => {
+export function useFormDataProvide(formData: FormData): FormInjectKey {
   const key: FormInjectKey = Symbol('formData')
   provide(key, formData)
 
@@ -23,6 +22,5 @@ export const useFormDataProvide = (formData: FormData): FormInjectKey => {
 /**
  * 获取 formData 数据
  * @param key
- * @returns
  */
 export const useFormData = (key: FormInjectKey): FormData => inject<FormData>(key)!

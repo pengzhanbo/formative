@@ -53,7 +53,7 @@ export type ArrayFieldItem =
   | Omit<ObjectField, 'field'>
   | Omit<ArrayField, 'field'>
 
-type FieldOptions = (string | number | { label: string; value: string | number })[]
+type FieldOptions = (string | number | { label: string, value: string | number })[]
 
 export interface BasicField {
   type: FieldType
@@ -141,7 +141,7 @@ export interface CheckboxField extends BasicField {
   options: FieldOptions
   onUpdateValue?: (
     value: string | number | (string | number)[],
-    meta: { actionType: 'check' | 'uncheck'; value: string | number }
+    meta: { actionType: 'check' | 'uncheck', value: string | number }
   ) => void
 }
 
@@ -212,7 +212,7 @@ export interface NumberField extends BasicField {
   buttonPlacement?: 'both' | 'right'
   clearable?: boolean
   disabled?: boolean
-  keyboard?: { ArrowUp?: boolean; ArrowDown?: boolean }
+  keyboard?: { ArrowUp?: boolean, ArrowDown?: boolean }
   loading?: boolean
   min?: number
   max?: number

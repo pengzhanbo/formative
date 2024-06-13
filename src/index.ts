@@ -3,7 +3,7 @@
  */
 import type { App } from 'vue'
 import Formative from './components/Formative'
-import { FormativeConfig } from './types'
+import type { FormativeConfig } from './types'
 
 import './style.scss'
 
@@ -16,8 +16,9 @@ export const defineFormativeConfig = (config: FormativeConfig): FormativeConfig 
 /**
  * 作为 vue plugin ，允许通过 app.use() 注册为全局组件
  */
-const install = (app: App) => {
-  if ((install as any).installed) return
+function install(app: App) {
+  if ((install as any).installed)
+    return
   app.component(Formative.name, Formative)
   ;(install as any).installed = true
 }

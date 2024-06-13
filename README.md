@@ -6,15 +6,14 @@
 
 ## 效果展示
 
-![](./images/demo-1.png)
+![demo-1](./images/demo-1.png)
 
 字段为 数组/对象：
-![](./images/demo-2.png)
+![demo-2](./images/demo-2.png)
 
 对字段分组展示：
 
-![](./images/demo-3.png)
-
+![demo-3](./images/demo-3.png)
 
 ## 使用
 
@@ -136,13 +135,13 @@ interface BasicField {
 ## 启动项目
 
 通过 `git clone` 拉取本项目到本地后，安装依赖，然后启动项目，建议使用 `yarn|pnpm`
+
 ```sh
 # yarn
 yarn dev
 # pnpm
 pnpm dev
 ```
-
 
 ----
 

@@ -41,18 +41,20 @@ export default defineComponent({
     const canDelete = computed(() => array.value.length > minLength.value)
 
     const addItem = () => {
-      if (isArray(props.schema.items)) return
+      if (isArray(props.schema.items))
+        return
       if (array.value.length < maxLength.value) {
         array.value.push(
           isObject(props.schema.items.default)
             ? cloneJson(props.schema.items.default)
-            : props.schema.items.default
+            : props.schema.items.default,
         )
       }
     }
 
     const deleteItem = (index: number) => {
-      if (isArray(props.schema.items)) return
+      if (isArray(props.schema.items))
+        return
       if (array.value.length > minLength.value) {
         array.value.splice(index, 1)
       }
@@ -66,50 +68,52 @@ export default defineComponent({
             <Description description={props.schema.description} />
           </p>
           {/**
-           * 如果配置中的 items 是一个 固定长度的数组，
-           * 那么则对每个元素 根据其 field 类型动态渲染，（允许每个元素类型不同）
-           * 如果不是，则表示 声明的是数组中的每个元素的类型，（每个元素的类型相同）
-           */}
-          {isArray(props.schema.items) ? (
-            props.schema.items.map((item, index) => (
-              <Field
-                schema={{ ...item, field: `${index}` }}
-                injectKey={props.injectKey}
-                dotKey={dotKey.value}
-              />
-            ))
-          ) : (
-            <>
-              {array.value.map((_, index) => (
-                <Field
-                  schema={{ ...(props.schema.items as ArrayFieldItem), field: `${index}` }}
-                  injectKey={props.injectKey}
-                  dotKey={dotKey.value}
-                >
-                  <NButton
-                    class="fm-ml-4"
-                    size="small"
-                    type="error"
-                    circle
-                    disabled={!canDelete.value}
-                    onClick={() => deleteItem(index)}
+            * 如果配置中的 items 是一个 固定长度的数组，
+            * 那么则对每个元素 根据其 field 类型动态渲染，（允许每个元素类型不同）
+            * 如果不是，则表示 声明的是数组中的每个元素的类型，（每个元素的类型相同）
+            */}
+          {isArray(props.schema.items)
+            ? (
+                props.schema.items.map((item, index) => (
+                  <Field
+                    schema={{ ...item, field: `${index}` }}
+                    injectKey={props.injectKey}
+                    dotKey={dotKey.value}
+                  />
+                ))
+              )
+            : (
+              <>
+                {array.value.map((_, index) => (
+                  <Field
+                    schema={{ ...(props.schema.items as ArrayFieldItem), field: `${index}` }}
+                    injectKey={props.injectKey}
+                    dotKey={dotKey.value}
                   >
+                    <NButton
+                      class="fm-ml-4"
+                      size="small"
+                      type="error"
+                      circle
+                      disabled={!canDelete.value}
+                      onClick={() => deleteItem(index)}
+                    >
+                      {{
+                        icon: () => <DeleteIcon />,
+                      }}
+                    </NButton>
+                  </Field>
+                ))}
+                <NFormItem>
+                  <NButton size="small" type="primary" disabled={!canAdd.value} onClick={addItem}>
                     {{
-                      icon: () => <DeleteIcon />,
+                      icon: () => <AddIcon></AddIcon>,
+                      default: () => '添加',
                     }}
                   </NButton>
-                </Field>
-              ))}
-              <NFormItem>
-                <NButton size="small" type="primary" disabled={!canAdd.value} onClick={addItem}>
-                  {{
-                    icon: () => <AddIcon></AddIcon>,
-                    default: () => '添加',
-                  }}
-                </NButton>
-              </NFormItem>
-            </>
-          )}
+                </NFormItem>
+              </>
+              )}
         </div>
       </div>
     )

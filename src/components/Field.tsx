@@ -1,7 +1,8 @@
+import type { DefineComponent, PropType } from 'vue'
+import { computed, defineComponent, h, readonly } from 'vue'
 import { isFunction } from '../utils'
-import { computed, DefineComponent, PropType, readonly } from 'vue'
-import { defineComponent, h } from 'vue'
-import { FormInjectKey, useFormData } from '../composables'
+import type { FormInjectKey } from '../composables'
+import { useFormData } from '../composables'
 import type { FieldItem, FieldType } from '../types'
 import _Array from './Array'
 import _Checkbox from './Checkbox'
@@ -56,8 +57,8 @@ export default defineComponent({
   setup: (props, { slots }) => {
     const model = useFormData(props.injectKey)
     const show = computed(() => {
-      const showField =
-        typeof props.schema.showField === 'undefined' ? true : props.schema.showField
+      const showField
+        = typeof props.schema.showField === 'undefined' ? true : props.schema.showField
       return isFunction(showField) ? showField(readonly(model)) : showField
     })
     /**
@@ -73,7 +74,7 @@ export default defineComponent({
           dotKey: props.dotKey,
           show: show.value,
         },
-        slots
+        slots,
       )
   },
 })
